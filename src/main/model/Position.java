@@ -5,22 +5,29 @@ package model;
  **/
 public class Position {
 
+    int row;
+    int col;
+
     // REQUIRES: row >= 0, col >= 0
     // EFFECTS: creates a new Position with given row, col
     public Position(int row, int col) {
+        this.row = row;
+        this.col = col;
     }
 
     public int getRow() {
-        return 0;
+        return row;
     }
 
     public int getCol() {
-        return 0;
+        return col;
     }
 
     public void setRow(int row) {
+        this.row = row;
     }
 
     public void setCol(int col) {
+        this.col = col;
     }
 }
