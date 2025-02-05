@@ -1,0 +1,15 @@
+package model;
+
+// 
+public class Position {
+    
+    // REQUIRES: row >= 0, col >= 0
+    // EFFECTS: creates a new Position with given row, col
+    public Position(int row, int col) {
+    }
+
+    public int getRow() {return 0;}
+    public int getCol() {return 0;}
+    public void setRow() {}
+    public void setCol() {}
+}
