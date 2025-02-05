@@ -2,7 +2,6 @@
 
 ## Pathfinding Visualizer
 
---- 
 
 ### What will the application do?
 
