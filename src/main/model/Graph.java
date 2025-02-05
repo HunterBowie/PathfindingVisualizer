@@ -1,36 +1,78 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Repersents the grid in the visualization.
+ **/
 public class Graph {
 
-    // REQUIRES: rows >= 1, cols >= 1
+    private int rows;
+    private int cols;
+    private Position startPos;
+    private Position endPos;
+
+    private List<List<NodeType>> nodes;
+
+    // REQUIRES: rows >= 1, cols >= 1, startPos and endPos must be within rows/cols
     // EFFECTS: create a graph with given rows, cols
-    public Graph(int rows, int cols) {
+    public Graph(int rows, int cols, Position startPos, Position endPos) {
+        this.rows = rows;
+        this.cols = cols;
+        this.startPos = startPos;
+        this.endPos = endPos;
+        initNodes();
+
+    }
+
+    private void initNodes() {
+        nodes = new ArrayList<>();
+        List<NodeType> row = new ArrayList<>();
+        for (int j = 0; j < cols; j++) {
+            row.add(NodeType.EMPTY);
+        }
+        for (int i = 0; i < rows; i++) {
+            nodes.add(row);
+        }
     }
 
     // REQUIRES: pos is within graph dimesions
     // MODIFIES: this
     // EFFECTS: sets the pos on the graph to the given nodeType
     public void setNode(Position pos, NodeType nodeType) {
+        List<NodeType> row = nodes.get(pos.getRow());
+        row.set(pos.getCol(), nodeType);
     }
 
     // REQUIRES: pos is within graph dimesions
     // EFFECTS: gets the nodeType at the given pos
     public NodeType getNode(Position pos) {
-        return null;
+        return nodes.get(pos.getRow()).get(pos.getCol());
     }
 
     public Position getStartPos() {
-        return null;
+        return startPos;
     }
 
     public Position getEndPos() {
-        return null;
+        return endPos;
     }
 
     public void setStartPos(Position pos) {
+        startPos = pos;
     }
 
     public void setEndPos(Position pos) {
+        endPos = pos;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
     }
 
 }
