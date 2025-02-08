@@ -28,7 +28,9 @@ public class Position {
 
     // EFFECTS: returns the distance between the two positions
     public static double getDistance(Position pos1, Position pos2) {
-            return 0;
+        int xDiff = pos1.getCol() - pos2.getCol();
+        int yDiff = pos1.getRow() - pos2.getRow();
+        return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
     }
 
     public int getRow() {
