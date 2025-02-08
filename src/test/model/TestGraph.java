@@ -66,4 +66,21 @@ public class TestGraph {
                 NodeType.OPEN);
     }
 
+    @Test
+    public void setAllNodesTest() {
+        testGraph.setAllNodes(NodeType.WALL);
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                assertEquals(NodeType.WALL, testGraph.getNode(new Position(row, col)));
+            }
+        }
+        testGraph.setNode(new Position(3, 4), NodeType.PATH);
+        testGraph.setAllNodes(NodeType.EMPTY);
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                assertEquals(NodeType.EMPTY, testGraph.getNode(new Position(row, col)));
+            }
+        }
+    }
+
 }
