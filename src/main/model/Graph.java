@@ -1,5 +1,7 @@
 package model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class Graph {
             row.add(NodeType.EMPTY);
         }
         for (int i = 0; i < rows; i++) {
-            nodes.add(row);
+            nodes.add(new ArrayList<>(row));
         }
     }
 
@@ -49,6 +51,10 @@ public class Graph {
     // EFFECTS: gets the nodeType at the given pos
     public NodeType getNode(Position pos) {
         return nodes.get(pos.getRow()).get(pos.getCol());
+    }
+
+    public List<List<NodeType>> getAllNodes() {
+        return nodes;
     }
 
     public Position getStartPos() {
@@ -73,6 +79,12 @@ public class Graph {
 
     public int getCols() {
         return cols;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets all the nodes in the graph to the given nodeType
+    public void setAllNodes(NodeType nodeType) {
+
     }
 
 }
