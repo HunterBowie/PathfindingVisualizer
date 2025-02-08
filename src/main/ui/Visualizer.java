@@ -60,13 +60,13 @@ public class Visualizer {
 
     // EFFECTS: gets input from the user and returns it
     private String getCommandInput() {
-        System.out.println("CMDS: q: quit, a: add wall, c: clear walls, s: set start pos, e: set end pos");
+        System.out.println("Enter one of the following: q: quit, a: add wall, c: clear walls, s: set start pos, e: set end pos");
         return input.next();
     }
 
     // EFFECTS: gets input from the user and returns it
     private Position getPosInput() {
-        System.out.println("Enter a pos in the form \"row,col\"");
+        System.out.println("Enter a position in the form: \"{row},{col}\"");
         String[] raw = input.next().split(",");
         return new Position(Integer.valueOf(raw[0]), Integer.valueOf(raw[1]));
     }
