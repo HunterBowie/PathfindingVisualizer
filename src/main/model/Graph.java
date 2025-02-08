@@ -84,7 +84,11 @@ public class Graph {
     // MODIFIES: this
     // EFFECTS: sets all the nodes in the graph to the given nodeType
     public void setAllNodes(NodeType nodeType) {
-
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                nodes.get(row).set(col, nodeType);
+            }
+        }
     }
 
 }
