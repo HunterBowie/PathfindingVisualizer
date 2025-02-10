@@ -6,6 +6,9 @@ import model.Graph;
 import model.NodeType;
 import model.Position;
 
+/**
+ * Repersents the console interface for the visualization of the graph.
+ **/
 public class Visualizer {
 
     private Graph graph;
@@ -54,13 +57,15 @@ public class Visualizer {
             Position pos = getPosInput();
             graph.setEndPos(pos);
         } else {
-            System.out.println("Please enter valid command :v");
+            System.out.println("Please enter valid command :|");
         }
     }
 
     // EFFECTS: gets input from the user and returns it
     private String getCommandInput() {
-        System.out.println("Enter one of the following: q: quit, a: add wall, c: clear walls, s: set start pos, e: set end pos");
+        System.out.println("""
+        Enter one of the following: q: quit, a: add wall, 
+        c: clear walls, s: set start pos, e: set end pos""");
         return input.next();
     }
 
