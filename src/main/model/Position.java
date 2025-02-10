@@ -15,28 +15,33 @@ public class Position {
         this.col = col;
     }
 
+    // EFFECTS: returns the distance between the two positions
+    public static double getDistance(Position pos1, Position pos2) {
+        int diffX = pos1.getCol() - pos2.getCol();
+        int diffY = pos1.getRow() - pos2.getRow();
+        return Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        // exactly the same ref
+        if (this == obj) {
             return true;
-        if (obj == null || getClass() != obj.getClass())
+        }
+        // different classes
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
+        }
+        // same contents
         Position pos = (Position) obj;
         return row == pos.row && col == pos.col;
     }
-
-
-    // EFFECTS: returns the distance between the two positions
-    public static double getDistance(Position pos1, Position pos2) {
-        int xDiff = pos1.getCol() - pos2.getCol();
-        int yDiff = pos1.getRow() - pos2.getRow();
-        return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
-    }
-
+    
+    // getters and setters
     public int getRow() {
         return row;
     }
-
+    
     public int getCol() {
         return col;
     }

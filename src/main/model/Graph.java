@@ -1,6 +1,5 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,8 @@ public class Graph {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates nodes matrix with all EMPTY nodes
     private void initNodes() {
         nodes = new ArrayList<>();
         List<NodeType> row = new ArrayList<>();
@@ -53,6 +54,17 @@ public class Graph {
         return nodes.get(pos.getRow()).get(pos.getCol());
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets all the nodes in the graph to the given nodeType
+    public void setAllNodes(NodeType nodeType) {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                nodes.get(row).set(col, nodeType);
+            }
+        }
+    }
+
+    // getters and setters
     public List<List<NodeType>> getAllNodes() {
         return nodes;
     }
@@ -79,16 +91,6 @@ public class Graph {
 
     public int getCols() {
         return cols;
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets all the nodes in the graph to the given nodeType
-    public void setAllNodes(NodeType nodeType) {
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                nodes.get(row).set(col, nodeType);
-            }
-        }
     }
 
 }
