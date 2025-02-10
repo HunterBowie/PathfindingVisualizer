@@ -64,8 +64,8 @@ public class Visualizer {
     // EFFECTS: gets input from the user and returns it
     private String getCommandInput() {
         System.out.println("""
-        Enter one of the following: q: quit, a: add wall, 
-        c: clear walls, s: set start pos, e: set end pos""");
+                Enter one of the following: q: quit, a: add wall, \
+                c: clear walls, s: set start pos, e: set end pos""");
         return input.next();
     }
 
