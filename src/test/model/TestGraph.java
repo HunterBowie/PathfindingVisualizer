@@ -1,6 +1,7 @@
 package model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,45 +26,58 @@ public class TestGraph {
         assertEquals(testGraph.getCols(), 6);
         assertEquals(testGraph.getStartPos(), startPos);
         assertEquals(testGraph.getEndPos(), endPos);
+        assertFalse(testGraph.getAllNodes().isEmpty());
     }
 
     @Test
-    public void getNodeTest() {
-        assertEquals(testGraph.getNode(new Position(1, 1)),
-                NodeType.EMPTY);
-        testGraph.setNode(new Position(0, 1), NodeType.CLOSED);
-        assertEquals(testGraph.getNode(new Position(0, 1)),
-                NodeType.CLOSED);
-        assertEquals(testGraph.getNode(new Position(4, 5)),
-                NodeType.EMPTY);
-        testGraph.setNode(new Position(4, 5), NodeType.OPEN);
-        assertEquals(testGraph.getNode(new Position(4, 5)),
-                NodeType.OPEN);
-        assertEquals(testGraph.getNode(new Position(0, 0)),
-                NodeType.EMPTY);
-        testGraph.setNode(new Position(0, 0), NodeType.OPEN);
-        assertEquals(testGraph.getNode(new Position(0, 0)),
-                NodeType.OPEN);
-
+    public void getNodeEmptyTest() {
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                assertEquals(testGraph.getNode(new Position(row, col)),
+                        NodeType.EMPTY);
+            }
+        }
     }
 
     @Test
-    public void setNodeTest() {
-        assertEquals(testGraph.getNode(new Position(1, 1)),
-                NodeType.EMPTY);
+    public void getNodeOneChangedTest() {
         testGraph.setNode(new Position(0, 1), NodeType.CLOSED);
-        assertEquals(testGraph.getNode(new Position(0, 1)),
-                NodeType.CLOSED);
-        assertEquals(testGraph.getNode(new Position(4, 5)),
-                NodeType.EMPTY);
+
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position pos = new Position(row, col);
+                if (row == 0 && col == 1) {
+                    assertEquals(testGraph.getNode(pos),
+                            NodeType.CLOSED);
+                } else {
+                    assertEquals(testGraph.getNode(pos),
+                            NodeType.EMPTY);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void getNodeTwoChangedTest() {
+        testGraph.setNode(new Position(0, 1), NodeType.CLOSED);
         testGraph.setNode(new Position(4, 5), NodeType.OPEN);
-        assertEquals(testGraph.getNode(new Position(4, 5)),
-                NodeType.OPEN);
-        assertEquals(testGraph.getNode(new Position(0, 0)),
-                NodeType.EMPTY);
-        testGraph.setNode(new Position(0, 0), NodeType.OPEN);
-        assertEquals(testGraph.getNode(new Position(0, 0)),
-                NodeType.OPEN);
+
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position pos = new Position(row, col);
+                if (row == 0 && col == 1) {
+                    assertEquals(testGraph.getNode(pos),
+                            NodeType.CLOSED);
+                } else if (row == 4 && col == 5) {
+                    assertEquals(testGraph.getNode(pos),
+                            NodeType.OPEN);
+                } else {
+                    assertEquals(testGraph.getNode(pos),
+                            NodeType.EMPTY);
+                }
+            }
+        }
+
     }
 
     @Test
@@ -81,6 +95,16 @@ public class TestGraph {
                 assertEquals(NodeType.EMPTY, testGraph.getNode(new Position(row, col)));
             }
         }
+    }
+
+    @Test
+    public void setStartEndTest() {
+        Position pos = new Position(4, 3);
+        testGraph.setStartPos(pos);
+        assertEquals(pos, testGraph.getStartPos());
+        Position pos1 = new Position(24, 43);
+        testGraph.setEndPos(pos1);
+        assertEquals(pos1, testGraph.getEndPos());
     }
 
 }
