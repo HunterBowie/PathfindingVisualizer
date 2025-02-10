@@ -83,10 +83,13 @@ public class Visualizer {
             for (int col = 0; col < graph.getCols(); col++) {
                 Position pos = new Position(row, col);
                 String printChar = String.valueOf(graph.getNode(pos).ordinal());
+                if (printChar.equals("4")) {
+                    printChar = "W";
+                }
                 if (pos.equals(graph.getStartPos())) {
-                    printChar = "s";
+                    printChar = "S";
                 } else if (pos.equals(graph.getEndPos())) {
-                    printChar = "e";
+                    printChar = "E";
                 }
                 printRow = printRow + printChar;
             }
