@@ -29,7 +29,9 @@ Algorithms I could simulate:
 
 ### User Stories
 
+**Phase 1**
+
 - As a user, I want to be able to add a wall to my graph (arbitary X to Y)
 - As a user, I want to be able to view the walls I have added to the graph
 - As a user, I want to be able to move the start and end positions
-- As a user, I want to be able to reset the visualization and remove all the walls
+- As a user, I want to be able to remove all the walls
