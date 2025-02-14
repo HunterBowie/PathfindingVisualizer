@@ -14,7 +14,7 @@ public class Graph {
     private Position startPos;
     private Position endPos;
 
-    private List<List<NodeType>> nodes;
+    private List<List<Node>> nodes;
 
     // REQUIRES: rows >= 1, cols >= 1, startPos and endPos must be within rows/cols
     // EFFECTS: create a graph with given rows, cols
@@ -31,41 +31,43 @@ public class Graph {
     // EFFECTS: creates nodes matrix with all EMPTY nodes
     private void initNodes() {
         nodes = new ArrayList<>();
-        List<NodeType> row = new ArrayList<>();
-        for (int j = 0; j < cols; j++) {
-            row.add(NodeType.EMPTY);
+        
+        for (int j = 0; j < rows; j++) {
+            List<Node> row = new ArrayList<>();
+            for (int i = 0; i < cols; i++) {
+                row.add(new Node(NodeType.EMPTY));
+            }
+            nodes.add(row);
         }
-        for (int i = 0; i < rows; i++) {
-            nodes.add(new ArrayList<>(row));
-        }
+        
     }
 
     // REQUIRES: pos is within graph dimesions
     // MODIFIES: this
-    // EFFECTS: sets the pos on the graph to the given nodeType
-    public void setNode(Position pos, NodeType nodeType) {
-        List<NodeType> row = nodes.get(pos.getRow());
-        row.set(pos.getCol(), nodeType);
+    // EFFECTS: sets the pos on the graph to the given node
+    public void setNode(Position pos, Node node) {
+        List<Node> row = nodes.get(pos.getRow());
+        row.set(pos.getCol(), node);
     }
 
     // REQUIRES: pos is within graph dimesions
-    // EFFECTS: gets the nodeType at the given pos
-    public NodeType getNode(Position pos) {
+    // EFFECTS: gets the node at the given pos
+    public Node getNode(Position pos) {
         return nodes.get(pos.getRow()).get(pos.getCol());
     }
 
     // MODIFIES: this
-    // EFFECTS: sets all the nodes in the graph to the given nodeType
+    // EFFECTS: sets all the nodes in the graph to a new node of given nodeType
     public void setAllNodes(NodeType nodeType) {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                nodes.get(row).set(col, nodeType);
+                nodes.get(row).set(col, new Node(nodeType));
             }
         }
     }
 
     // getters and setters
-    public List<List<NodeType>> getAllNodes() {
+    public List<List<Node>> getAllNodes() {
         return nodes;
     }
 

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Repersents a node on a graph.
+ * Repersents a the type of a node
  **/
 public enum NodeType {
     EMPTY,

@@ -3,6 +3,7 @@ package ui;
 import java.util.Scanner;
 
 import model.Graph;
+import model.Node;
 import model.NodeType;
 import model.Position;
 
@@ -27,9 +28,8 @@ public class Visualizer {
         boolean running = true;
         String command = null;
 
-        renderGraph();
-
         while (running) {
+            renderGraph();
             command = getCommandInput();
 
             if (command.equals("q")) {
@@ -37,7 +37,6 @@ public class Visualizer {
             } else {
                 processCommand(command);
             }
-            renderGraph();
         }
 
     }
@@ -47,7 +46,7 @@ public class Visualizer {
     private void processCommand(String command) {
         if (command.equals("a")) {
             Position pos = getPosInput();
-            graph.setNode(pos, NodeType.WALL);
+            graph.setNode(pos, new Node(NodeType.WALL));
         } else if (command.equals("c")) {
             graph.setAllNodes(NodeType.EMPTY);
         } else if (command.equals("s")) {
@@ -82,10 +81,7 @@ public class Visualizer {
             String printRow = "";
             for (int col = 0; col < graph.getCols(); col++) {
                 Position pos = new Position(row, col);
-                String printChar = String.valueOf(graph.getNode(pos).ordinal());
-                if (printChar.equals("4")) {
-                    printChar = "W";
-                }
+                String printChar = graph.getNode(pos).toString();
                 if (pos.equals(graph.getStartPos())) {
                     printChar = "S";
                 } else if (pos.equals(graph.getEndPos())) {

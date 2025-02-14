@@ -12,7 +12,7 @@
 It will show the process of a pathfingin algorithm searching for a node on a graph. Users will be able to add walls between the start and end points and the algorithm will have to navigate around the walls to reach the end node. Once the algorithm has found the end node, it will draw out the path (sometimes the shortest path, depending on the algorithm) from start to end. 
 
 Algorithms I could simulate:
-- A*
+- A* (this is the first one I will try)
 - Depth-first
 - Breadth-first
 - Greedy Best-first
@@ -31,7 +31,7 @@ Algorithms I could simulate:
 
 **Phase 1**
 
-- As a user, I want to be able to add a wall to my graph (arbitary X to Y)
-- As a user, I want to be able to view the walls I have added to the graph
+- As a user, I want to be able to add a Node (of type wall) to my Graph (arbitary X to Y)
+- As a user, I want to be able to view the Nodes (of type wall) I have added to the graph (view Xs in Y)
 - As a user, I want to be able to move the start and end positions
-- As a user, I want to be able to remove all the walls
+- As a user, I want to be able to remove all the Nodes (of type wall)

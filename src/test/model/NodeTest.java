@@ -21,9 +21,9 @@ public class NodeTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(0, Math.round(node.getFCost()));
-        assertEquals(0, Math.round(node.getGCost()));
-        assertEquals(0, Math.round(node.getHCost()));
+        assertEquals(Math.round(Double.POSITIVE_INFINITY), Math.round(node.getFCost()));
+        assertEquals(Math.round(Double.POSITIVE_INFINITY), Math.round(node.getGCost()));
+        assertEquals(Math.round(Double.POSITIVE_INFINITY), Math.round(node.getHCost()));
         assertEquals(NodeType.EMPTY, node.getNodeType());
     }
 
@@ -32,16 +32,16 @@ public class NodeTest {
         node.setGCost(4);
         node.setHCost(1);
         anotherNode.setGCost(3);
-        anotherNode.setGCost(2);
+        anotherNode.setHCost(2);
 
         assertFalse(node.isLowerCost(anotherNode));
         assertFalse(anotherNode.isLowerCost(node));
         node.setGCost(0);
-        assertTrue(node.isLowerCost(anotherNode));
-        assertFalse(anotherNode.isLowerCost(node));
-        node.setHCost(10);
         assertFalse(node.isLowerCost(anotherNode));
         assertTrue(anotherNode.isLowerCost(node));
+        node.setHCost(10);
+        assertTrue(node.isLowerCost(anotherNode));
+        assertFalse(anotherNode.isLowerCost(node));
     }
 
     @Test
@@ -56,6 +56,13 @@ public class NodeTest {
         assertEquals("O", newNode3.toString());
         Node newNode4 = new Node(NodeType.WALL);
         assertEquals("X", newNode4.toString());
+    }
+
+    @Test
+    public void testGetFCost() {
+        node.setGCost(1);
+        node.setHCost(3);
+        assertEquals(4, Math.round(node.getFCost()));
     }
 
 
