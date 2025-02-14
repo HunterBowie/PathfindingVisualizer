@@ -28,14 +28,18 @@ public class Node {
         return 0;
     }
 
-    public void setGCost() {
+    public void setGCost(double cost) {
     }
 
-    public void setHCost() {
+    public void setHCost(double cost) {
     }
 
     public double getFCost() {
         return 0;
+    }
+
+    public NodeType getNodeType() {
+        return null;
     }
     
 }
