@@ -9,21 +9,19 @@ import model.Graph;
  **/
 public abstract class Algorithm {
     
+    protected Graph graph;
+    protected boolean finished;
 
-    // MODIFIES: this
-    // EFFECTS: sets this algorithms graph
-    public void setGraph(Graph graph) {
+    // EFFECTS: creates a new algorithm with given graph
+    public Algorithm(Graph graph) {
+        this.graph = graph;
+        finished = false;
     }
     
     // EFFECTS: returns the algorithm's graph 
-    public Graph getGraph(Graph graph) {
-        return null;
+    public Graph getGraph() {
+        return graph;
     }
-
-    // REQUIRES: graph must be set
-    // MODIFIES: this
-    // EFFECTS: sets up the algorithm with the graph
-    public abstract void start();
 
     // REQUIRES: algorithm must be started
     // MODIFIES: this
@@ -32,7 +30,7 @@ public abstract class Algorithm {
 
     // EFFECTS: returns whether the algorithm has finished
     public boolean isFinished() {
-        return false;
+        return finished;
     }
     
 } 

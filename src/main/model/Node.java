@@ -14,7 +14,7 @@ public class Node {
     public Node(NodeType nodeType) {
         this.nodeType = nodeType;
         this.costG = Double.POSITIVE_INFINITY;
-        this.costH = Double.POSITIVE_INFINITY;
+        this.costH = -1;
     }
 
     // EFFECTS: return if the given node has a lower f cost than the this one
@@ -67,6 +67,10 @@ public class Node {
 
     public NodeType getNodeType() {
         return nodeType;
+    }
+
+    public void setNodeType(NodeType nodeType) {
+        this.nodeType = nodeType;
     }
     
 }

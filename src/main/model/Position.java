@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Repersents a position on a graph.
  **/
@@ -36,12 +39,12 @@ public class Position {
         Position pos = (Position) obj;
         return row == pos.row && col == pos.col;
     }
-    
+
     // getters and setters
     public int getRow() {
         return row;
     }
-    
+
     public int getCol() {
         return col;
     }
@@ -52,6 +55,32 @@ public class Position {
 
     public void setCol(int col) {
         this.col = col;
+    }
+
+    // EFFECTS: return the list of immediate neighbors
+    public List<Position> getNeighbors() {
+        List<Position> positions = new ArrayList<>();
+        positions.add(new Position(row + 1, col));
+        positions.add(new Position(row, col + 1));
+        positions.add(new Position(row + 1, col + 1));
+        positions.add(new Position(row - 1, col));
+        positions.add(new Position(row, col - 1));
+        positions.add(new Position(row - 1, col - 1));
+        positions.add(new Position(row - 1, col + 1));
+        positions.add(new Position(row + 1, col - 1));
+        return positions;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(col) + "," + Integer.toString(row);
+    }
+
+    public static Position load(String encoded) {
+        String[] bits = encoded.split(",");
+        int col = Integer.valueOf(bits[0]);
+        int row = Integer.valueOf(bits[1]);
+        return new Position(row, col);
     }
 
 }

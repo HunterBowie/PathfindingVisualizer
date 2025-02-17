@@ -23,7 +23,7 @@ public class NodeTest {
     public void testConstructor() {
         assertEquals(Math.round(Double.POSITIVE_INFINITY), Math.round(node.getFCost()));
         assertEquals(Math.round(Double.POSITIVE_INFINITY), Math.round(node.getGCost()));
-        assertEquals(Math.round(Double.POSITIVE_INFINITY), Math.round(node.getHCost()));
+        assertEquals(-1, Math.round(node.getHCost()));
         assertEquals(NodeType.EMPTY, node.getNodeType());
     }
 
