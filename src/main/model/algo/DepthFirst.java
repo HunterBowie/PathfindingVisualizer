@@ -1,18 +1,12 @@
 package model.algo;
 
-import exceptions.AlgoFinished;
-import exceptions.AlgoOutOfMoves;
 import model.Graph;
 
-public class DepthFirst extends Algorithm {
+
+public class DepthFirst extends DepthBreadth {
 
     // EFFECTS: creates a DepthFirst algorithm with a given graph
     public DepthFirst(Graph graph) {
+        super(graph, true);
     }
-
-    @Override
-    public void step() throws AlgoFinished, AlgoOutOfMoves {
-        
-    }
-    
 }
