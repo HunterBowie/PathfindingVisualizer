@@ -23,6 +23,10 @@ public abstract class Algorithm {
         return graph;
     }
 
+    // MODIFIES: this
+    // EFFECTS: highlights the shortest path on the graph
+    protected abstract void highlightPath();
+
     // REQUIRES: algorithm must be started
     // MODIFIES: this
     // EFFECTS: advance the algorithms search on the graph
