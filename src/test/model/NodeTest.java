@@ -49,13 +49,13 @@ public class NodeTest {
         Node newNode = new Node(NodeType.EMPTY);
         assertEquals("-", newNode.toString());
         Node newNode1 = new Node(NodeType.CLOSED);
-        assertEquals("0", newNode1.toString());
+        assertEquals("X", newNode1.toString());
         Node newNode2 = new Node(NodeType.PATH);
         assertEquals("P", newNode2.toString());
         Node newNode3 = new Node(NodeType.OPEN);
         assertEquals("O", newNode3.toString());
         Node newNode4 = new Node(NodeType.WALL);
-        assertEquals("X", newNode4.toString());
+        assertEquals(" ", newNode4.toString());
     }
 
     @Test

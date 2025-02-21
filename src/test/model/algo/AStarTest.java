@@ -74,40 +74,6 @@ public class AStarTest extends AlgorithmTest {
     }
 
     @Test
-    @Override
-    public void testConstructor() {
-        assertEquals(graph, algo.getGraph());
-        assertFalse(algo.isFinished()); 
-    }
-
-    @Test
-    public void testNoMoves() {
-        graph.setNode(new Position(0, 1), new Node(NodeType.WALL));
-        graph.setNode(new Position(1, 1), new Node(NodeType.WALL));
-        graph.setNode(new Position(1, 0), new Node(NodeType.WALL));
-        algo.step();
-        try {
-            algo.step();
-            fail();
-        } catch (AlgoOutOfMoves e) {
-
-        }
-    }
-
-    @Test
-    public void testFinished() {
-        while (!algo.isFinished()) {
-            algo.step();
-        }
-        try {
-            algo.step();
-            fail();
-        } catch (AlgoFinished e) {
-
-        }
-    }
-
-    @Test
     public void testStepOnceNoWalls() {
         algo.step();
         for (int row = 0; row < 4; row++) {
