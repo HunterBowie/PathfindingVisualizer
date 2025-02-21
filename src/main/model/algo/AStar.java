@@ -77,17 +77,14 @@ public class AStar extends Algorithm {
         return minPos;
     }
 
-    // REQUIRES: end pos must be in cameFrom
-    // MODIFIES: this
-    // EFFECTS: highlights the shortest path on the graph
-    private void highlightPath() {
+    @Override
+    protected void highlightPath() {
         Position next = Position.load(pathHistory.get(graph.getEndPos().toString()));
 
         while (pathHistory.containsKey(next.toString())) {
             graph.getNode(next).setNodeType(NodeType.PATH);
             next = Position.load(pathHistory.get(next.toString()));
         }
-
     }
 
     // REQUIRES: currentPos must be a position within the bonds of graph
@@ -107,9 +104,6 @@ public class AStar extends Algorithm {
                 neighborNode.setGCost(newGCost);
                 if (neighborNode.getHCost() == -1) {
                     neighborNode.setHCost(Position.getDistance(neighbor, graph.getEndPos()));
-                }
-                else {
-                    System.out.println("sla;fdk;jss");
                 }
                 if (!open.contains(neighbor)) {
                     open.add(neighbor);
