@@ -35,3 +35,8 @@ Algorithms I could simulate:
 - As a user, I want to be able to view the Nodes (of type wall) I have added to the graph (view Xs in Y)
 - As a user, I want to be able to move the start and end positions
 - As a user, I want to be able to remove all the Nodes (of type wall)
+
+**Phase 2**
+
+- As a user, I want to be able to save the Wall Nodes I placed on my Graph, the start and end positions, and the type algorithm to a file with a name I provide
+- As a user, I want to be prompted to load the Wall Nodes I placed on my Graph, the start and end positions, and the type algorithm using the name of the file
