@@ -73,13 +73,13 @@ public class Position {
 
     @Override
     public String toString() {
-        return Integer.toString(col) + "," + Integer.toString(row);
+        return Integer.toString(row) + "," + Integer.toString(col);
     }
 
     public static Position load(String encoded) {
         String[] bits = encoded.split(",");
-        int col = Integer.valueOf(bits[0]);
-        int row = Integer.valueOf(bits[1]);
+        int row = Integer.valueOf(bits[0]);
+        int col = Integer.valueOf(bits[1]);
         return new Position(row, col);
     }
 

@@ -31,7 +31,7 @@ public class Node {
             return "-";
         }
         if (nodeType == NodeType.CLOSED) {
-            return "0";
+            return "X";
         }
         if (nodeType == NodeType.PATH) {
             return "P";
@@ -39,7 +39,7 @@ public class Node {
         if (nodeType == NodeType.OPEN) {
             return "O";
         }
-        return "X";
+        return " ";
     }
     
     // EFFECTS: returns the gcost + hcost
