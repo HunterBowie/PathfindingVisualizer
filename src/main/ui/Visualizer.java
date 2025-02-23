@@ -65,21 +65,26 @@ public class Visualizer {
             Position pos = getPosInput();
             graph.setEndPos(pos);
         } else if (command.equals("r")) {
-            int delay = 200;
-            if (algo.getClass() == BreadthFirst.class) {
-                delay = 20;
-            }
-            while (!algo.isFinished()) {
-                System.out.println();
-                algo.step();
-                renderGraph();
-                Thread.sleep(delay);
-            }
-            graph.setAllNodes(NodeType.EMPTY);
-            algo = getAlgoInput();
+            runAlgorithm();
         } else {
             System.out.println("Input '" + command + "' is not valid");
         }
+    }
+
+    // EFFECTS: runs the algorithm and prints the results to the console
+    private void runAlgorithm() throws InterruptedException {
+        int delay = 200;
+        if (algo.getClass() == BreadthFirst.class) {
+            delay = 20;
+        }
+        while (!algo.isFinished()) {
+            System.out.println();
+            algo.step();
+            renderGraph();
+            Thread.sleep(delay);
+        }
+        graph.setAllNodes(NodeType.EMPTY);
+        algo = getAlgoInput();
     }
 
     // EFFECTS: returns user input after stripped and making lower case
