@@ -10,8 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import exceptions.AlgoFinished;
-import exceptions.AlgoOutOfMoves;
 import model.Graph;
 import model.Node;
 import model.NodeType;
