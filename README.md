@@ -38,5 +38,7 @@ Algorithms I could simulate:
 
 **Phase 2**
 
-- As a user, I want to be able to save the Wall Nodes I placed on my Graph, the start and end positions, and the type algorithm to a file with a name I provide
-- As a user, I want to be prompted to load the Wall Nodes I placed on my Graph, the start and end positions, and the type algorithm using the name of the file
+- As a user, I want to be able to save the Wall Nodes I placed on my Graph, the Graph dimensions, the start and end positions, and the type algorithm to a file with a name I provide
+- As a user, I want to be prompted to load the Wall Nodes I placed on my Graph, the Graph dimensions, the start and end positions, and the type algorithm using the name of the file
+- As a user, I want to be able to choose a pathfinding algorithm and watch that algorithm progress from the start to the end positions
+- As a user, I want to be able to see the path the algorithmn determined after it runs
