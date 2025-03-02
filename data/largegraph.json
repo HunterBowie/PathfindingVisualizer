@@ -1,0 +1,1 @@
+{"walls":[[9,9],[99,99]],"start":[0,0],"end":[99,99],"rows":100,"cols":100,"algo":"model.algo.DepthFirst"}

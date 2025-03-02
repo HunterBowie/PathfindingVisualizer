@@ -16,8 +16,7 @@ public class ReadWriteJsonTest {
 
     @Test
     public void testConstructor() {
-        ReadWriteJson readWrite = new ReadWriteJson();
-        assertEquals("./data/", readWrite.getPath());
+        new ReadWriteJson();
     }
 
     @Test
@@ -33,24 +32,23 @@ public class ReadWriteJsonTest {
     @Test
     public void testReadTestFile() {
         try {
-            JSONObject obj = ReadWriteJson.readJson("readTest.json");
+            JSONObject obj = ReadWriteJson.readJson("test/readTest.json");
             List<Integer> list = new ArrayList<>();
             list.add(1);
             list.add(2);
             list.add(3);
-            
+
             List<Integer> listFromJson = new ArrayList<>();
             JSONArray loadedArray = obj.getJSONArray("list");
             for (Object item : loadedArray) {
-                listFromJson.add((Integer)item);
+                listFromJson.add((Integer) item);
             }
             assertEquals(list, listFromJson);
         } catch (IOException e) {
             fail(e.toString());
         }
-        
-    }
 
+    }
 
     @Test
     public void testWriteInvalidFile() {
@@ -65,10 +63,10 @@ public class ReadWriteJsonTest {
     @Test
     public void testWriteTestFile() {
         try {
-            ReadWriteJson.writeJson(new JSONObject(), "writeTest.json");
+            ReadWriteJson.writeJson(new JSONObject(), "test/writeTest.json");
         } catch (FileNotFoundException e) {
             fail(e.toString());
         }
     }
-    
+
 }

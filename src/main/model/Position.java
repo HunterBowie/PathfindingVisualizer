@@ -39,7 +39,7 @@ public class Position {
         Position pos = (Position) obj;
         return row == pos.row && col == pos.col;
     }
-
+    
     // getters and setters
     public int getRow() {
         return row;
