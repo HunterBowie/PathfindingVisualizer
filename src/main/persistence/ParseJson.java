@@ -1,7 +1,5 @@
 package persistence;
 
-import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,7 +28,7 @@ JSON Format:
  **/
 public class ParseJson {
 
-    // REQUIRES: JSON data must be in the correct format 
+    // REQUIRES: JSON data must be in the correct format
     // EFFECTS: returns a Graph using the given JSON data
     public static Graph toGraph(JSONObject data) {
         int rows = (int) data.get("rows");
@@ -52,7 +50,7 @@ public class ParseJson {
         return graph;
     }
 
-    // REQUIRES: JSON data must be in the correct format 
+    // REQUIRES: JSON data must be in the correct format
     // EFFECTS: returns a Algorithmn using the given JSON data and graph
     public static Algorithm toAlgorithm(JSONObject data, Graph graph) {
         String value = data.get("algo").toString();
@@ -85,7 +83,6 @@ public class ParseJson {
         endPos.put(graph.getEndPos().getRow());
         endPos.put(graph.getEndPos().getCol());
 
-        
         JSONArray walls = ParseJson.graphToWalls(graph);
 
         JSONObject data = new JSONObject();
@@ -96,7 +93,7 @@ public class ParseJson {
         data.put("walls", walls);
 
         data.put("algo", algo.getClass().getName());
-        
+
         return data;
     }
 
