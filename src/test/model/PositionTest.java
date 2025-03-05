@@ -42,6 +42,12 @@ public class PositionTest {
     }
 
     @Test
+    public void testHashCode() {
+        assertTrue(testPos.hashCode() != anotherPos.hashCode());
+        assertEquals(testPos.hashCode(), testPos.hashCode());
+    }
+
+    @Test
     public void testSetRowCol() {
         testPos.setCol(3);
         assertEquals(1, testPos.getRow());

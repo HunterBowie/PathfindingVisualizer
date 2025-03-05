@@ -26,20 +26,30 @@ public class Position {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        // exactly the same ref
-        if (this == obj) {
-            return true;
-        }
-        // different classes
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        // same contents
-        Position pos = (Position) obj;
-        return row == pos.row && col == pos.col;
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + row;
+        result = prime * result + col;
+        return result;
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Position other = (Position) obj;
+        if (row != other.row)
+            return false;
+        if (col != other.col)
+            return false;
+        return true;
+    }
+
     // getters and setters
     public int getRow() {
         return row;

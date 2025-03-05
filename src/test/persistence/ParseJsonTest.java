@@ -19,9 +19,9 @@ import model.algo.BreadthFirst;
 import model.algo.DepthFirst;
 
 public class ParseJsonTest {
-    
+
     private JSONObject data;
-    
+
     @BeforeEach
     public void setUp() {
         data = new JSONObject();
@@ -43,7 +43,7 @@ public class ParseJsonTest {
         walls.put(wall1);
         data.put("walls", walls);
     }
-    
+
     @Test
     public void testConstuctor() {
         new ParseJson();
@@ -69,8 +69,9 @@ public class ParseJsonTest {
         assertEquals(graph.getNode(new Position(1, 1)).getNodeType(), NodeType.WALL);
         Algorithm algo = ParseJson.toAlgorithm(data, graph);
         assertTrue(algo.getClass().getName() == AStar.class.getName());
-        
+
     }
+
     @Test
     public void testToAlgorithmDepthFirst() {
         data.put("algo", DepthFirst.class.getName());
@@ -82,8 +83,9 @@ public class ParseJsonTest {
         assertEquals(graph.getNode(new Position(1, 1)).getNodeType(), NodeType.WALL);
         Algorithm algo = ParseJson.toAlgorithm(data, graph);
         assertTrue(algo.getClass().getName() == DepthFirst.class.getName());
-        
+
     }
+
     @Test
     public void testToAlgorithmBreadthFirst() {
         data.put("algo", BreadthFirst.class.getName());
@@ -95,7 +97,7 @@ public class ParseJsonTest {
         assertEquals(graph.getNode(new Position(1, 1)).getNodeType(), NodeType.WALL);
         Algorithm algo = ParseJson.toAlgorithm(data, graph);
         assertTrue(algo.getClass().getName() == BreadthFirst.class.getName());
-        
+
     }
 
     @Test
@@ -113,7 +115,7 @@ public class ParseJsonTest {
         } catch (JsonParseError e) {
             // pass
         }
-        
+
     }
 
     @Test
@@ -132,21 +134,18 @@ public class ParseJsonTest {
 
         assertEquals(dataArray.get(0), 0);
         assertEquals(dataArray.get(1), 5);
-        
+
         JSONArray dataArray2 = (JSONArray) data.get("end");
 
         assertEquals(dataArray2.get(0), 9);
         assertEquals(dataArray2.get(1), 8);
-
 
         JSONArray dataArray3 = (JSONArray) data.get("walls");
         JSONArray dataWall = (JSONArray) dataArray3.get(0);
 
         assertEquals(dataWall.get(0), 2);
         assertEquals(dataWall.get(1), 3);
-        
+
     }
-
-
 
 }
