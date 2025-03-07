@@ -21,14 +21,14 @@ import persistence.ReadWriteJson;
 /**
  * Repersents the console interface for the visualization of the graph.
  **/
-public class Visualizer {
+public class ConsoleUI {
 
     private Graph graph;
     private Algorithm algo;
     private Scanner scanner;
 
     // EFFECTS: creates a new Visualizer
-    public Visualizer() throws InterruptedException, IOException {
+    public ConsoleUI() throws InterruptedException, IOException {
         setUp();
         runVisualizer();
     }
