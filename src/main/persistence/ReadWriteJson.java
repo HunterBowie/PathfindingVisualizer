@@ -16,6 +16,7 @@ import org.json.JSONObject;
  **/
 public class ReadWriteJson {
     private static String PATH = "./data/";
+    private static int INDENTATION = 4;
 
     // EFFECTS: returns the json object from given file
     // throws IOException if file does not exist
@@ -33,7 +34,7 @@ public class ReadWriteJson {
     // throws FileNotFoundException if file includes a path that does not exist
     public static void writeJson(JSONObject data, String file) throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(new File(PATH + file));
-        writer.print(data);
+        writer.print(data.toString(INDENTATION));
         writer.close();
     }
 

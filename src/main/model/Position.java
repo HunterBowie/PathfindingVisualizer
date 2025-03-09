@@ -16,6 +16,8 @@ public class Position {
     public Position(int row, int col) {
         this.row = row;
         this.col = col;
+        assert row >= 0;
+        assert col >= 0;
     }
 
     // EFFECTS: returns the distance between the two positions
