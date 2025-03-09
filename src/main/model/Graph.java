@@ -57,13 +57,24 @@ public class Graph {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets all the nodes in the graph to a new node of given nodeType
-    public void setAllNodes(NodeType nodeType) {
+    // EFFECTS: resets all the nodes in the graph to a new empty node
+    public void resetAllNodes() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                nodes.get(row).set(col, new Node(nodeType));
+                setNode(new Position(row, col), new Node(NodeType.EMPTY));
             }
         }
+    }
+
+    // EFFECTS: returns whether the given position is legal on the graph
+    public boolean isLegalPosition(Position pos) {
+        if (pos.getRow() < 0 || pos.getCol() < 0) {
+            return false;
+        }
+        if (pos.getRow() >= getRows() || pos.getCol() >= getCols()) {
+            return false;
+        }
+        return true;
     }
 
     // getters and setters

@@ -2,6 +2,7 @@ package model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -83,20 +84,14 @@ public class GraphTest {
     }
 
     @Test
-    public void testSetAllNodes() {
-        testGraph.setAllNodes(NodeType.WALL);
+    public void testResetAllNodes() {
+        testGraph.resetAllNodes();
         for (int row = 0; row < testGraph.getRows(); row++) {
             for (int col = 0; col < testGraph.getCols(); col++) {
-                assertEquals(NodeType.WALL,
-                        testGraph.getNode(new Position(row, col)).getNodeType());
-            }
-        }
-        testGraph.setNode(new Position(3, 4), new Node(NodeType.PATH));
-        testGraph.setAllNodes(NodeType.EMPTY);
-        for (int row = 0; row < testGraph.getRows(); row++) {
-            for (int col = 0; col < testGraph.getCols(); col++) {
-                assertEquals(NodeType.EMPTY,
-                        testGraph.getNode(new Position(row, col)).getNodeType());
+                Node node = testGraph.getNode(new Position(row, col));
+                assertEquals(NodeType.EMPTY, node.getNodeType());
+                assertTrue(Double.POSITIVE_INFINITY == node.getGCost());
+                assertTrue(-1 == node.getHCost());
             }
         }
     }
