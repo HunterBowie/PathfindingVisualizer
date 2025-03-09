@@ -42,3 +42,4 @@ Algorithms I could simulate:
 - As a user, I want to be prompted to load the Wall Nodes I placed on my Graph, the Graph dimensions, the start and end positions, and the type algorithm using the name of the file
 - As a user, I want to be able to choose a pathfinding algorithm and watch that algorithm progress from the start to the end positions
 - As a user, I want to be able to see the path the algorithmn determined after it runs
+
