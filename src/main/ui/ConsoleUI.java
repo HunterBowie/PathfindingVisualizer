@@ -19,7 +19,7 @@ import persistence.ParseJson;
 import persistence.ReadWriteJson;
 
 /**
- * Repersents the console interface for the visualization of the graph.
+ * Repersents the console interface for the visualization.
  **/
 public class ConsoleUI {
 
@@ -121,7 +121,7 @@ public class ConsoleUI {
             Position pos = getPosInput();
             graph.setNode(pos, new Node(NodeType.WALL));
         } else if (command.equals("c")) {
-            graph.setAllNodes(NodeType.EMPTY);
+            graph.resetAllNodes();
         } else if (command.equals("s")) {
             Position pos = getPosInput();
             graph.setStartPos(pos);
