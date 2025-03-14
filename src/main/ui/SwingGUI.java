@@ -1,12 +1,25 @@
 package ui;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
+
+import org.json.JSONObject;
 
 import exceptions.AlgoFinished;
 import exceptions.AlgoOutOfMoves;
@@ -14,6 +27,17 @@ import model.Graph;
 import model.Position;
 import model.algo.AStar;
 import model.algo.Algorithm;
+import model.algo.BreadthFirst;
+import model.algo.DepthFirst;
+import persistence.ParseJson;
+import persistence.ReadWriteJson;
+import ui.input.GraphKeyInput;
+import ui.input.GraphMouseInput;
+import ui.menu.CreateGraphMenu;
+import ui.menu.EnterFileMenu;
+import ui.menu.GraphMenu;
+import ui.menu.Menu;
+import ui.menu.StartMenu;
 
 /**
  * Repersents the GUI for the algorithm visualization
@@ -22,42 +46,68 @@ public class SwingGUI extends JFrame {
 
     private static final int UPDATE_DELAY_MS = 10;
 
-    private GraphPanel graphPanel;
+    private GraphMenu graphMenu;
     private Algorithm algo;
     private boolean running = false;
+    private CardLayout menus;
+    private JPanel menuContainer;
+    private Menu showingMenu;
 
     // EFFECTS: constructs a new SwingGUI
     public SwingGUI() {
-        super("Pathfinding Visualization");
-        graphPanel = new GraphPanel(new Graph(30, 30,
-                new Position(5, 5), new Position(20, 20)));
-        algo = new AStar(graphPanel.getGraph());
-        add(graphPanel);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(false);
-        setVisible(true);
-        pack();
-        centreOnScreen();
-        start();
-        setResizable(false);
-        addKeyListener(new KeyInput(this));
-        addMouseListener(new MouseInput(this));
+        super("Pathfinding Visualizer");
+        graphMenu = new GraphMenu(new Graph(40, 40,
+                new Position(0, 0), new Position(18, 17)), this);
+        algo = new AStar(graphMenu.getGraph());
+        menus = new CardLayout();
+        menuContainer = new JPanel(menus);
+        menuContainer.add(new StartMenu(this), Menu.START.name());
+        menuContainer.add(new EnterFileMenu(this), Menu.ENTER_FILE.name());
+        menuContainer.add(new CreateGraphMenu(this), Menu.CREATE_GRAPH.name());
+        menuContainer.add(graphMenu, Menu.GRAPH.name());
+        showMenu(Menu.START);
+        add(menuContainer, BorderLayout.CENTER);
+        setUp();
+        updateVisualization();
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes a timer that updates the visualization
-    private void start() {
+    // EFFECTS: sets the correct settings in JFrame
+    private void setUp() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setUndecorated(false);
+        setResizable(false);
+        addKeyListener(new GraphKeyInput(this));
+        addMouseListener(new GraphMouseInput(this));
+        setSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
+        centreOnScreen();
+        setFocusable(true);
+        setVisible(true);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: shows the given menu 
+    public void showMenu(Menu menu) {
+        menus.show(menuContainer, menu.name());
+        showingMenu = menu;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates the visualization when running
+    private void updateVisualization() {
         Timer t = new Timer(UPDATE_DELAY_MS, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                graphPanel.repaint();
-                if (running) {
-                    try {
-                        algo.step();
-                    } catch (AlgoOutOfMoves e) {
-                        running = false;
-                    } catch (AlgoFinished e) {
-                        running = false;
+                if (isShowingGraph()) {
+                    graphMenu.repaint();
+                    if (running) {
+                        try {
+                            algo.step();
+                        } catch (AlgoOutOfMoves e) {
+                            running = false;
+                        } catch (AlgoFinished e) {
+                            running = false;
+                        }
                     }
                 }
             }
@@ -69,8 +119,8 @@ public class SwingGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: location of frame is set so frame is centred on screen
     private void centreOnScreen() {
-        Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((screen.width - getWidth()) / 2, (screen.height - getHeight()) / 2);
     }
 
     // getters and setters
@@ -83,11 +133,11 @@ public class SwingGUI extends JFrame {
     }
 
     public Graph getGraph() {
-        return graphPanel.getGraph();
+        return graphMenu.getGraph();
     }
 
     public void setGraph(Graph graph) {
-        graphPanel.setGraph(graph);
+        graphMenu.setGraph(graph);
     }
 
     public boolean getRunning() {
@@ -96,6 +146,24 @@ public class SwingGUI extends JFrame {
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public GraphMenu getGraphMenu() {
+        return graphMenu;
+    }
+
+    public boolean isShowingGraph() {
+        return Menu.GRAPH == showingMenu;
+    }
+
+    public void resetAlgorithm() {
+        if (algo instanceof AStar) {
+            algo = new AStar(getGraph());
+        } else if (algo instanceof BreadthFirst) {
+            algo = new BreadthFirst(getGraph());
+        } else {
+            algo = new DepthFirst(getGraph());
+        }
     }
 
 }
