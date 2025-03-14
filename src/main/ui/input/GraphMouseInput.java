@@ -1,4 +1,4 @@
-package ui;
+package ui.input;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -11,24 +11,23 @@ import javax.swing.Timer;
 import exceptions.IllegalPosition;
 import model.NodeType;
 import model.Position;
+import ui.Constants;
+import ui.SwingGUI;
 
 /**
  * Repersents the handling of mouse events
  **/
-public class MouseInput extends MouseAdapter {
-
-    public static final int TOP_BAR_WIDTH = 30;
-    public static final int MOUSE_HELD_DELAY_MS = 2;
+public class GraphMouseInput extends MouseAdapter {
 
     private SwingGUI gui;
     private Timer whileMouseHeld;
     private int mouseButtonHeld;
     private boolean mouseHeld = false;
 
-    // EFFECTS: creates a new MouseInput with the given GUI  
-    public MouseInput(SwingGUI gui) {
+    // EFFECTS: creates a new MouseInput with the given GUI
+    public GraphMouseInput(SwingGUI gui) {
         this.gui = gui;
-        whileMouseHeld = new Timer(MOUSE_HELD_DELAY_MS, _ -> {
+        whileMouseHeld = new Timer(Constants.MOUSE_HELD_DELAY_MS, _ -> {
             NodeType nodeType = NodeType.WALL;
             if (mouseButtonHeld == MouseEvent.BUTTON3) {
                 nodeType = NodeType.EMPTY;
@@ -47,8 +46,9 @@ public class MouseInput extends MouseAdapter {
     private Position getMousePosition() throws IllegalPosition {
         Point mousePoint = MouseInfo.getPointerInfo().getLocation();
         SwingUtilities.convertPointFromScreen(mousePoint, gui);
-        int col = (mousePoint.x) / GraphPanel.CELL_WIDTH;
-        int row = (mousePoint.y - TOP_BAR_WIDTH) / GraphPanel.CELL_WIDTH;
+        int col = (mousePoint.x - Constants.GRAPH_MENU_X_POS) / gui.getGraphMenu().getCellWidth();
+        int row = (mousePoint.y - Constants.TOP_BAR_WIDTH - Constants.GRAPH_MENU_Y_POS)
+                / gui.getGraphMenu().getCellWidth();
         Position pos = new Position(row, col);
         if (!gui.getGraph().isLegalPosition(pos)) {
             throw new IllegalPosition();
@@ -58,18 +58,22 @@ public class MouseInput extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (!mouseHeld) {
-            mouseHeld = true;
-            mouseButtonHeld = e.getButton();
-            whileMouseHeld.start();
+        if (this.gui.isShowingGraph()) {
+            if (!mouseHeld) {
+                mouseHeld = true;
+                mouseButtonHeld = e.getButton();
+                whileMouseHeld.start();
+            }
         }
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        mouseHeld = false;
-        whileMouseHeld.stop();
+        if (this.gui.isShowingGraph()) {
+            mouseHeld = false;
+            whileMouseHeld.stop();
+        }
     }
 
 }
