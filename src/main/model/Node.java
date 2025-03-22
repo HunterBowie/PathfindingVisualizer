@@ -25,6 +25,7 @@ public class Node {
         return false;
     }
 
+    // EFFECTS: gets the string repersentation of the node used in the console UI
     @Override
     public String toString() {
         if (nodeType == NodeType.EMPTY) {
@@ -63,7 +64,6 @@ public class Node {
     public void setHCost(double cost) {
         costH = cost;
     }
-
 
     public NodeType getNodeType() {
         return nodeType;

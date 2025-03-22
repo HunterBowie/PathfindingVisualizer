@@ -113,7 +113,6 @@ public class DepthBreadth extends Algorithm {
         
         Position currentPosition = stack.get(index);
 
-        List<Position> path = paths.get(index);
 
         if (currentPosition.equals(graph.getEndPos())) {
             highlightPath();

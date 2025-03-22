@@ -106,4 +106,33 @@ public class GraphTest {
         assertEquals(pos1, testGraph.getEndPos());
     }
 
+    @Test
+    public void testIsLegalPosition() {
+        assertTrue(testGraph.isLegalPosition(new Position(1, 1)));
+        assertFalse(testGraph.isLegalPosition(new Position(-1, 1)));
+        assertFalse(testGraph.isLegalPosition(new Position(1, -1)));
+        assertFalse(testGraph.isLegalPosition(new Position(5, 0)));
+        assertFalse(testGraph.isLegalPosition(new Position(0, 6)));
+    }
+
+    @Test
+    public void testSoftResetAllNodes() {
+        testGraph.getNode(endPos).setNodeType(NodeType.WALL);
+        testGraph.softResetAllNodes();
+
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position pos = new Position(row, col);
+                Node node = testGraph.getNode(pos);
+                if (pos.equals(endPos)) {
+                    assertEquals(NodeType.WALL, node.getNodeType());
+                } else {
+                    assertEquals(NodeType.EMPTY, node.getNodeType());
+                }
+                assertTrue(Double.POSITIVE_INFINITY == node.getGCost());
+                assertTrue(-1 == node.getHCost());
+            }
+        }
+    }
+
 }

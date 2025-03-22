@@ -43,3 +43,16 @@ Algorithms I could simulate:
 - As a user, I want to be able to choose a pathfinding algorithm and watch that algorithm progress from the start to the end positions
 - As a user, I want to be able to see the path the algorithmn determined after it runs
 
+
+### Instructions for End User (**Phase 3**)
+
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by running the program and clicking "Load Graph". Then type "graph.json" into the prompt and hit the enter key. You should see a grid of squares. To add walls (black squares) to this graph, simply hold down the left mouse button over the squares you wish to change
+
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by running the program and clicking "Load Graph". Then type "graph.json" into the prompt and hit the enter key. You should see a grid of squares. To remove walls (black squares) to from graph, simply hold down the right mouse button over the black squares you wish to change
+
+- You can locate my visual component by loading/creating a graph. This can be done by running the program and clicking "Load Graph". Then type "graph.json" into the prompt and hit the enter key. The graph contains colored squares that indicate walls and algorithm progression.
+
+- You can save the state of my application by clicking the "save" button on after loading/creating a graph. You will be promted to enter the name of a file. Once you enter the name (followed by the extension) and press enter (or the submit button). You will have saved your graph. This means the walls, size of the graph, start and end position, and algorithm have been saved.
+
+- You can reload the state of my application by pressing the "load graph" button that appears when you first launch the application and the then typing the name of the file you saved your data in (with extension) and pressing enter.
+

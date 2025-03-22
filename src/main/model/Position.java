@@ -11,15 +11,13 @@ public class Position {
     private int row;
     private int col;
 
-    // REQUIRES: row >= 0, col >= 0
     // EFFECTS: creates a new Position with given row, col
     public Position(int row, int col) {
         this.row = row;
         this.col = col;
-        assert row >= 0;
-        assert col >= 0;
     }
 
+    // REQUIRES: pos1 and pos2 must have positive rows/cols
     // EFFECTS: returns the distance between the two positions
     public static double getDistance(Position pos1, Position pos2) {
         int diffX = pos1.getCol() - pos2.getCol();
@@ -27,6 +25,35 @@ public class Position {
         return Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
     }
 
+    // EFFECTS: return the list of immediate neighbors
+    public List<Position> getNeighbors() {
+        List<Position> positions = new ArrayList<>();
+        positions.add(new Position(row + 1, col));
+        positions.add(new Position(row, col + 1));
+        positions.add(new Position(row + 1, col + 1));
+        positions.add(new Position(row - 1, col));
+        positions.add(new Position(row, col - 1));
+        positions.add(new Position(row - 1, col - 1));
+        positions.add(new Position(row - 1, col + 1));
+        positions.add(new Position(row + 1, col - 1));
+        return positions;
+    }
+    
+    // EFFECTS: gets the string repersentation for the position
+    @Override
+    public String toString() {
+        return Integer.toString(row) + "," + Integer.toString(col);
+    }
+    
+    // REQUIRES: encoded must be of the form "{int},{int}"
+    // EFFECTS: creates a new Position based on an encoded string value
+    public static Position load(String encoded) {
+        String[] bits = encoded.split(",");
+        int row = Integer.valueOf(bits[0]);
+        int col = Integer.valueOf(bits[1]);
+        return new Position(row, col);
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -73,31 +100,4 @@ public class Position {
     public void setCol(int col) {
         this.col = col;
     }
-
-    // EFFECTS: return the list of immediate neighbors
-    public List<Position> getNeighbors() {
-        List<Position> positions = new ArrayList<>();
-        positions.add(new Position(row + 1, col));
-        positions.add(new Position(row, col + 1));
-        positions.add(new Position(row + 1, col + 1));
-        positions.add(new Position(row - 1, col));
-        positions.add(new Position(row, col - 1));
-        positions.add(new Position(row - 1, col - 1));
-        positions.add(new Position(row - 1, col + 1));
-        positions.add(new Position(row + 1, col - 1));
-        return positions;
-    }
-
-    @Override
-    public String toString() {
-        return Integer.toString(row) + "," + Integer.toString(col);
-    }
-
-    public static Position load(String encoded) {
-        String[] bits = encoded.split(",");
-        int row = Integer.valueOf(bits[0]);
-        int col = Integer.valueOf(bits[1]);
-        return new Position(row, col);
-    }
-
 }

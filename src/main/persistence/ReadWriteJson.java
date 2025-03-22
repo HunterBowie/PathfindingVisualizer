@@ -21,6 +21,7 @@ public class ReadWriteJson {
     // EFFECTS: returns the json object from given file
     // throws IOException if file does not exist
     public static JSONObject readJson(String file) throws IOException {
+        // partially taken from JSON example provided 
         StringBuilder contentBuilder = new StringBuilder();
 
         Stream<String> stream = Files.lines(Paths.get(PATH + file), StandardCharsets.UTF_8);

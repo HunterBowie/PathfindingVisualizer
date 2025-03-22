@@ -110,7 +110,7 @@ public class ParseJsonTest {
         assertEquals(graph.getEndPos(), new Position(3, 4));
         assertEquals(graph.getNode(new Position(1, 1)).getNodeType(), NodeType.WALL);
         try {
-            Algorithm algo = ParseJson.toAlgorithm(data, graph);
+            ParseJson.toAlgorithm(data, graph);
             fail("Should have thrown JsonParseError");
         } catch (JsonParseError e) {
             // pass

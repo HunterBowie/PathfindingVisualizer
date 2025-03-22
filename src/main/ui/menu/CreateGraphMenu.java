@@ -2,13 +2,10 @@ package ui.menu;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,8 +14,6 @@ import javax.swing.JTextField;
 import model.Graph;
 import model.Position;
 import model.algo.AStar;
-import model.algo.BreadthFirst;
-import model.algo.DepthFirst;
 import ui.SwingGUI;
 
 /**
@@ -40,63 +35,63 @@ public class CreateGraphMenu extends JPanel {
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(Box.createVerticalGlue());
-        JLabel title = new JLabel("Enter number of columns/rows (one number) and Algorithm");
+        add(Box.createVerticalGlue());
+        JLabel title = new JLabel("Enter size (rows/columns), start position, end position, and Algorithm");
         add(title);
-        JTextField textbox = new JTextField();
-        textbox.setMaximumSize(new Dimension(150, 50));
-        add(textbox);
-        
-        String[] options = { "AStar", "Breadth First", "Depth First" };
-        JComboBox<String> comboBox = new JComboBox<>(options);
-        comboBox.setMaximumSize(new Dimension(150, 30));
-        add(comboBox);
-        
+        JTextField sizeTextBox = new JTextField("10");
+        sizeTextBox.setMaximumSize(new Dimension(150, 50));
+        add(sizeTextBox);
+
+        JTextField startTextBox = new JTextField("1, 4");
+        startTextBox.setMaximumSize(new Dimension(150, 50));
+        add(startTextBox);
+
+        JTextField endTextBox = new JTextField("3, 2");
+        endTextBox.setMaximumSize(new Dimension(150, 50));
+        add(endTextBox);
+
         JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(_ -> onSubmit(textbox, comboBox));
-        textbox.addActionListener(_ -> onSubmit(textbox, comboBox));
+        sizeTextBox.addActionListener(_ -> onSubmit(sizeTextBox, startTextBox, endTextBox));
+        submitButton.addActionListener(_ -> onSubmit(sizeTextBox, startTextBox, endTextBox));
         add(submitButton);
         JButton backButton = new JButton("Back");
         backButton.addActionListener(_ -> gui.showMenu(Menu.START));
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(backButton);
-        this.add(Box.createVerticalGlue());
+        add(Box.createVerticalGlue());
     }
 
     // MODIFIES: this
-    // EFFECTS: attempts to load the graph from the values in the textbox and combobox
-    private void onSubmit(JTextField textbox, JComboBox<String> comboBox) {
+    // EFFECTS: attempts to load the graph from the values in the textbox and
+    // combobox
+    private void onSubmit(JTextField sizeTextBox, JTextField startTextBox, JTextField endTextBox) {
         try {
-            int rows = Integer.valueOf(textbox.getText().strip());
-            gui.getGraphMenu().setGraph(new Graph(rows, rows,
-                    new Position(0, 0), new Position(rows - 1, rows - 1)));
+            int rows = Integer.valueOf(sizeTextBox.getText().strip());
+            String[] rawStartPos = startTextBox.getText().replace(" ", "").split(",");
+            int startRow = Integer.valueOf(rawStartPos[0]);
+            int startCol = Integer.valueOf(rawStartPos[1]);
+            String[] rawEndPos = endTextBox.getText().replace(" ", "").split(",");
+            int endRow = Integer.valueOf(rawEndPos[0]);
+            int endCol = Integer.valueOf(rawEndPos[1]);
+            gui.setGraph(new Graph(rows, rows,
+                    new Position(startRow, startCol), new Position(endRow, endCol)));
 
-            switch ((String) comboBox.getSelectedItem()) {
-                case "AStar":
-                    gui.setAlgorithm(new AStar(gui.getGraphMenu().getGraph()));
-                    break;
-                case "Breadth First":
-                    gui.setAlgorithm(new BreadthFirst(gui.getGraphMenu().getGraph()));
-                    break;
-                case "Depth First":
-                    gui.setAlgorithm(new DepthFirst(gui.getGraphMenu().getGraph()));
-                    break;
-
-                default:
-                    System.out.println("BAD STUFF");
-                    break;
-            }
+            gui.setAlgorithm(new AStar(gui.getGraphMenu().getGraph()));
 
             gui.showMenu(Menu.GRAPH);
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             // pass
         } finally {
-            textbox.setText("");
+            sizeTextBox.setText("");
+            startTextBox.setText("");
+            endTextBox.setText("");
         }
 
     }
 
+    // MODIFIES: this, component
+    // EFFECTS: adds component to panel while seting its alignment to center
     @Override
     public Component add(Component component) {
         ((JComponent) component).setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -38,9 +38,14 @@ public class StartMenu extends JPanel {
         JButton createButton = new JButton("Create Graph");
         createButton.addActionListener(_ -> gui.showMenu(Menu.CREATE_GRAPH));
         add(createButton);
+        JButton quitButton = new JButton("Quit");
+        quitButton.addActionListener(_ -> System.exit(0));
+        add(quitButton);
         this.add(Box.createVerticalGlue());
     }
 
+    // MODIFIES: this, component
+    // EFFECTS: adds component to panel while seting its alignment to center
     @Override
     public Component add(Component component) {
         ((JComponent) component).setAlignmentX(Component.CENTER_ALIGNMENT);

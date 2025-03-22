@@ -77,11 +77,28 @@ public class Graph {
         return true;
     }
 
+    
+    // MODIFIES: this
+    // EFFECTS: resets all the nodes in the graph to a new node with same type
+    public void softResetAllNodes() {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                Position pos = new Position(row, col);
+                NodeType type = getNode(pos).getNodeType();
+                if (type != NodeType.WALL) {
+                    type = NodeType.EMPTY;
+                }
+                
+                setNode(pos, new Node(type));
+            }
+        }
+    }
+    
     // getters and setters
     public List<List<Node>> getAllNodes() {
         return nodes;
     }
-
+    
     public Position getStartPos() {
         return startPos;
     }

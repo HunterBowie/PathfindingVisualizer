@@ -8,7 +8,7 @@ import model.Graph;
  * Repersents a type of pathfinding algorithm
  **/
 public abstract class Algorithm {
-    
+
     protected Graph graph;
     protected boolean finished;
 
@@ -17,8 +17,8 @@ public abstract class Algorithm {
         this.graph = graph;
         finished = false;
     }
-    
-    // EFFECTS: returns the algorithm's graph 
+
+    // EFFECTS: returns the algorithm's graph
     public Graph getGraph() {
         return graph;
     }
@@ -36,5 +36,6 @@ public abstract class Algorithm {
     public boolean isFinished() {
         return finished;
     }
-    
-} 
+
+
+}
