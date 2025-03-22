@@ -36,7 +36,7 @@ public class CreateGraphMenu extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         add(Box.createVerticalGlue());
-        JLabel title = new JLabel("Enter size (rows/columns), start position, end position, and Algorithm");
+        JLabel title = new JLabel("Enter graph size (rows/columns), start position, and end position");
         add(title);
         JTextField sizeTextBox = new JTextField("10");
         sizeTextBox.setMaximumSize(new Dimension(150, 50));
