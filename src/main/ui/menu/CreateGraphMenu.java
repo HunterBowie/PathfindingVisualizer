@@ -73,12 +73,15 @@ public class CreateGraphMenu extends JPanel {
             String[] rawEndPos = endTextBox.getText().replace(" ", "").split(",");
             int endRow = Integer.valueOf(rawEndPos[0]);
             int endCol = Integer.valueOf(rawEndPos[1]);
-            gui.setGraph(new Graph(rows, rows,
-                    new Position(startRow, startCol), new Position(endRow, endCol)));
+            if (endRow < rows && endCol < rows && startRow < rows && startCol < rows) {
+                gui.setGraph(new Graph(rows, rows,
+                new Position(startRow, startCol), new Position(endRow, endCol)));
 
-            gui.setAlgorithm(new AStar(gui.getGraphMenu().getGraph()));
+                gui.setAlgorithm(new AStar(gui.getGraphMenu().getGraph()));
 
-            gui.showMenu(Menu.GRAPH);
+                gui.showMenu(Menu.GRAPH);
+            }
+           
 
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             // pass
