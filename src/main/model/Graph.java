@@ -96,7 +96,8 @@ public class Graph {
             }
         }
     }
-
+    
+    // REQUIRES: pos must be legal
     // MODIFIES: this
     // EFFECTS: adds a wall to the position on the graph
     //          if one does not already exist there
@@ -109,6 +110,7 @@ public class Graph {
         }
     }
 
+    // REQUIRES: pos must be legal
     // MODIFIES: this
     // EFFECTS: removes a wall from the position on the graph
     //          if it exists
