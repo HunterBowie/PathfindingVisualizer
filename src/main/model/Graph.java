@@ -42,7 +42,7 @@ public class Graph {
         
     }
 
-    // REQUIRES: pos is within graph dimesions
+    // REQUIRES: pos legal
     // MODIFIES: this
     // EFFECTS: sets the pos on the graph to the given node
     public void setNode(Position pos, Node node) {
@@ -50,7 +50,7 @@ public class Graph {
         row.set(pos.getCol(), node);
     }
 
-    // REQUIRES: pos is within graph dimesions
+    // REQUIRES: pos is legal
     // EFFECTS: gets the node at the given pos
     public Node getNode(Position pos) {
         return nodes.get(pos.getRow()).get(pos.getCol());
@@ -59,6 +59,9 @@ public class Graph {
     // MODIFIES: this
     // EFFECTS: resets all the nodes in the graph to a new empty node
     public void resetAllNodes() {
+        EventLog.getInstance().logEvent(
+            new Event("Clearing Nodes")
+        );
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 setNode(new Position(row, col), new Node(NodeType.EMPTY));
@@ -93,7 +96,31 @@ public class Graph {
             }
         }
     }
-    
+
+    // MODIFIES: this
+    // EFFECTS: adds a wall to the position on the graph
+    //          if one does not already exist there
+    public void addWall(Position pos) {
+        if (getNode(pos).getNodeType() == NodeType.EMPTY) {
+            EventLog.getInstance().logEvent(
+                new Event("Added a wall to " + pos)
+            );
+            getNode(pos).setNodeType(NodeType.WALL);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes a wall from the position on the graph
+    //          if it exists
+    public void removeWall(Position pos) {
+        if (getNode(pos).getNodeType() == NodeType.WALL) {
+            EventLog.getInstance().logEvent(
+                new Event("Removed a wall from " + pos)
+            );
+            getNode(pos).setNodeType(NodeType.EMPTY);
+        }
+    }
+
     // getters and setters
     public List<List<Node>> getAllNodes() {
         return nodes;

@@ -56,3 +56,17 @@ Algorithms I could simulate:
 
 - You can reload the state of my application by pressing the "load graph" button that appears when you first launch the application and the then typing the name of the file you saved your data in (with extension) and pressing enter.
 
+### Phase 4: Task 2
+
+Tue Mar 25 16:32:18 PDT 2025
+Added a wall to 11,5
+Tue Mar 25 16:32:18 PDT 2025
+Added a wall to 12,5
+Tue Mar 25 16:32:19 PDT 2025
+Added a wall to 12,6
+Tue Mar 25 16:32:19 PDT 2025
+Added a wall to 13,6
+Tue Mar 25 16:32:19 PDT 2025
+Added a wall to 14,6
+Tue Mar 25 16:32:22 PDT 2025
+Removed a wall from 12,6

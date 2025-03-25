@@ -75,7 +75,7 @@ public class CreateGraphMenu extends JPanel {
             int endCol = Integer.valueOf(rawEndPos[1]);
             if (endRow < rows && endCol < rows && startRow < rows && startCol < rows) {
                 gui.setGraph(new Graph(rows, rows,
-                new Position(startRow, startCol), new Position(endRow, endCol)));
+                        new Position(startRow, startCol), new Position(endRow, endCol)));
 
                 gui.setAlgorithm(new AStar(gui.getGraphMenu().getGraph()));
 

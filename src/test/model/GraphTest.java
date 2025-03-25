@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -133,6 +135,77 @@ public class GraphTest {
                 assertTrue(-1 == node.getHCost());
             }
         }
+    }
+
+    @Test
+    public void testAddWall() {
+        Position pos = new Position(1, 3);
+        testGraph.addWall(pos);
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position currentPos = new Position(row, col);
+                NodeType type = testGraph.getNode(currentPos).getNodeType();
+                if (currentPos.equals(pos)) {
+                    assertEquals(NodeType.WALL, type);
+                } else {
+                    assertEquals(NodeType.EMPTY, type);
+                }
+               
+            }
+        }
+        testGraph.addWall(pos);
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position currentPos = new Position(row, col);
+                NodeType type = testGraph.getNode(currentPos).getNodeType();
+                if (currentPos.equals(pos)) {
+                    assertEquals(NodeType.WALL, type);
+                } else {
+                    assertEquals(NodeType.EMPTY, type);
+                }
+               
+            }
+        }
+
+
+    }
+    @Test
+    public void testRemoveWall() {
+        Position pos = new Position(1, 3);
+        testGraph.addWall(pos);
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position currentPos = new Position(row, col);
+                NodeType type = testGraph.getNode(currentPos).getNodeType();
+                if (currentPos.equals(pos)) {
+                    assertEquals(NodeType.WALL, type);
+                } else {
+                    assertEquals(NodeType.EMPTY, type);
+                }
+               
+            }
+        }
+        testGraph.removeWall(pos);
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position currentPos = new Position(row, col);
+                NodeType type = testGraph.getNode(currentPos).getNodeType();
+                assertEquals(NodeType.EMPTY, type);
+                
+               
+            }
+        }
+        testGraph.removeWall(pos);
+        for (int row = 0; row < testGraph.getRows(); row++) {
+            for (int col = 0; col < testGraph.getCols(); col++) {
+                Position currentPos = new Position(row, col);
+                NodeType type = testGraph.getNode(currentPos).getNodeType();
+                assertEquals(NodeType.EMPTY, type);
+                
+               
+            }
+        }
+
     }
 
 }

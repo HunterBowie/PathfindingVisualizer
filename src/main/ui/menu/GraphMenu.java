@@ -2,6 +2,7 @@ package ui.menu;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.Graphics;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import model.EventLog;
 import model.Graph;
 import model.NodeType;
 import model.Position;
@@ -59,6 +61,9 @@ public class GraphMenu extends JPanel {
 
         JButton quiteButton = new JButton("Quit");
         quiteButton.addActionListener(_ -> {
+            for (model.Event event : EventLog.getInstance()) {
+                System.out.println(event);
+            }
             System.exit(0);
         });
         quiteButton.setBounds(0, 470, 100, 30);

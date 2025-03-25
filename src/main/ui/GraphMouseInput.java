@@ -29,13 +29,18 @@ public class GraphMouseInput extends MouseAdapter {
             if (gui.isRunning()) {
                 return;
             }
-            NodeType nodeType = NodeType.WALL;
+            
+            boolean rightClick = false; 
             if (mouseButtonHeld == MouseEvent.BUTTON3) {
-                nodeType = NodeType.EMPTY;
+                rightClick = true;
             }
             try {
                 Position pos = getMousePosition();
-                gui.getGraph().getNode(pos).setNodeType(nodeType);
+                if (rightClick) {
+                    gui.getGraph().removeWall(pos);
+                } else {
+                    gui.getGraph().addWall(pos);
+                }
             } catch (IllegalMousePosition e) {
                 // pass
             }

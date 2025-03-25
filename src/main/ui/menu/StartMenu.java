@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.EventLog;
 import ui.SwingGUI;
 
 /**
@@ -39,7 +40,12 @@ public class StartMenu extends JPanel {
         createButton.addActionListener(_ -> gui.showMenu(Menu.CREATE_GRAPH));
         add(createButton);
         JButton quitButton = new JButton("Quit");
-        quitButton.addActionListener(_ -> System.exit(0));
+        quitButton.addActionListener(_ -> {
+             for (model.Event event : EventLog.getInstance()) {
+                System.out.println(event);
+            }
+            System.exit(0);
+        });
         add(quitButton);
         this.add(Box.createVerticalGlue());
     }
