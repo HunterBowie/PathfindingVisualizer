@@ -25,6 +25,13 @@ public class StartMenu extends JPanel {
         this.gui = gui;
     }
 
+    // EFFECTS: print the log to the console
+    private void printLog() {
+        for (model.Event event : EventLog.getInstance()) {
+            System.out.println(event);
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: adds all the components to the menu
     private void initComponents() {
@@ -34,16 +41,14 @@ public class StartMenu extends JPanel {
         JLabel title = new JLabel("Would you like to create a new graph or load an existing one?");
         add(title);
         JButton loadButton = new JButton("Load Graph");
-        loadButton.addActionListener(_ -> gui.showMenu(Menu.ENTER_FILE));
+        loadButton.addActionListener(e -> gui.showMenu(Menu.ENTER_FILE));
         add(loadButton);
         JButton createButton = new JButton("Create Graph");
-        createButton.addActionListener(_ -> gui.showMenu(Menu.CREATE_GRAPH));
+        createButton.addActionListener(e -> gui.showMenu(Menu.CREATE_GRAPH));
         add(createButton);
         JButton quitButton = new JButton("Quit");
-        quitButton.addActionListener(_ -> {
-             for (model.Event event : EventLog.getInstance()) {
-                System.out.println(event);
-            }
+        quitButton.addActionListener(e -> {
+            printLog();
             System.exit(0);
         });
         add(quitButton);

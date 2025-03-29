@@ -70,3 +70,7 @@ Tue Mar 25 16:32:19 PDT 2025
 Added a wall to 14,6
 Tue Mar 25 16:32:22 PDT 2025
 Removed a wall from 12,6
+
+### Phase 4: Task 3
+
+I would refactor the GraphMenu and SwingGUI classes to use some new class to store the Graph, Algorithm, and timer for updating it. The fact that SwingGUI controls the timer that updates the visualization seems like it violates the principle of cohesion to me. I would need to create a new class in model and call it something like "Visualizer". The "Visualizer" would be reponsible for updating the graph using the algorithm, so it would store an algorithm, graph, speed value, and timer. If I did this, I could also elimate a number of associations between the various menus and SwingGUI by replacing the SwingGUI with a "Visualizer" reference instead. This would help with the coupling in the ui package (because all the menus would no longer have a copy of SwingGUI) and allow all the interactions with the model to go through one class which would help with the coupling across the packages. 

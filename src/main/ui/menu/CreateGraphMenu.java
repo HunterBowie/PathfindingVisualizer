@@ -51,11 +51,11 @@ public class CreateGraphMenu extends JPanel {
         add(endTextBox);
 
         JButton submitButton = new JButton("Submit");
-        sizeTextBox.addActionListener(_ -> onSubmit(sizeTextBox, startTextBox, endTextBox));
-        submitButton.addActionListener(_ -> onSubmit(sizeTextBox, startTextBox, endTextBox));
+        sizeTextBox.addActionListener(e -> onSubmit(sizeTextBox, startTextBox, endTextBox));
+        submitButton.addActionListener(e -> onSubmit(sizeTextBox, startTextBox, endTextBox));
         add(submitButton);
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(_ -> gui.showMenu(Menu.START));
+        backButton.addActionListener(e -> gui.showMenu(Menu.START));
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(backButton);
         add(Box.createVerticalGlue());

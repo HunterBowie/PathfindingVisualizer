@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.Timer;
 
 import exceptions.IllegalMousePosition;
-import model.NodeType;
 import model.Position;
 
 /**
@@ -25,7 +24,7 @@ public class GraphMouseInput extends MouseAdapter {
     // EFFECTS: creates a new MouseInput with the given GUI
     public GraphMouseInput(SwingGUI gui) {
         this.gui = gui;
-        whileMouseHeld = new Timer(Constants.MOUSE_HELD_DELAY_MS, _ -> {
+        whileMouseHeld = new Timer(Constants.MOUSE_HELD_DELAY_MS, event -> {
             if (gui.isRunning()) {
                 return;
             }

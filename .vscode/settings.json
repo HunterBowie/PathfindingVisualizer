@@ -5,7 +5,8 @@
     ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "/Users/hunterbowie/Desktop/CPSC210/ProjectStarter/lib/junit-platform-console-standalone-1.10.2.jar",
+        "/Users/hunterbowie/Desktop/CPSC210/ProjectStarter/lib/json-20240303.jar"
     ],
     "java.checkstyle.configuration": "${workspaceFolder}/checkstyle.xml",
     "java.checkstyle.version": "10.2"

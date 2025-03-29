@@ -43,13 +43,13 @@ public class EnterFileMenu extends JPanel {
         add(title);
         JTextField textbox = new JTextField();
         textbox.setMaximumSize(new Dimension(150, 50));
-        textbox.addActionListener(_ -> onSubmit(textbox));
+        textbox.addActionListener(e -> onSubmit(textbox));
         add(textbox);
         JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(_ -> onSubmit(textbox));
+        submitButton.addActionListener(e -> onSubmit(textbox));
         add(submitButton);
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(_ -> gui.showMenu(Menu.START));
+        backButton.addActionListener(e -> gui.showMenu(Menu.START));
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(backButton);
         this.add(Box.createVerticalGlue());

@@ -49,34 +49,39 @@ public class GraphMenu extends JPanel {
         initComponents();
     }
 
+    // EFFECTS: prints the log to the console
+    private void printLog() {
+        for (model.Event event : EventLog.getInstance()) {
+            System.out.println(event);
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: adds all the components on the left side to the menu
     private void initLeftSideComponents() {
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(_ -> {
+        backButton.addActionListener(e -> {
             gui.showMenu(Menu.START);
         });
         backButton.setBounds(0, 0, 100, 30);
         add(backButton);
 
         JButton quiteButton = new JButton("Quit");
-        quiteButton.addActionListener(_ -> {
-            for (model.Event event : EventLog.getInstance()) {
-                System.out.println(event);
-            }
+        quiteButton.addActionListener(e -> {
+            printLog();
             System.exit(0);
         });
         quiteButton.setBounds(0, 470, 100, 30);
         add(quiteButton);
 
         JComboBox<String> algoComboBox = new JComboBox<>(ALGO_NAMES);
-        algoComboBox.addActionListener(_ -> onChangeAlgo(algoComboBox));
+        algoComboBox.addActionListener(e -> onChangeAlgo(algoComboBox));
         algoComboBox.setBounds(0, 150, 100, 30);
         add(algoComboBox);
 
         JComboBox<String> speedComboBox = new JComboBox<>(SPEEDS);
         speedComboBox.setSelectedItem("Normal");
-        speedComboBox.addActionListener(_ -> onSpeedChange(speedComboBox));
+        speedComboBox.addActionListener(e -> onSpeedChange(speedComboBox));
         speedComboBox.setBounds(0, 250, 100, 30);
         add(speedComboBox);
     }
@@ -85,12 +90,12 @@ public class GraphMenu extends JPanel {
     // EFFECTS: adds all the components on the right side to the menu
     private void initRightSideComponents() {
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(_ -> gui.showMenu(Menu.SAVE));
+        saveButton.addActionListener(e -> gui.showMenu(Menu.SAVE));
         saveButton.setBounds(600, 470, 100, 30);
         add(saveButton);
 
         JButton runButton = new JButton("Run");
-        runButton.addActionListener(_ -> {
+        runButton.addActionListener(e -> {
             if (!gui.getAlgorithm().isFinished()) {
                 gui.setRunning(true);
             }
@@ -99,12 +104,12 @@ public class GraphMenu extends JPanel {
         add(runButton);
 
         JButton pauseButton = new JButton("Pause");
-        pauseButton.addActionListener(_ -> onPause());
+        pauseButton.addActionListener(e -> onPause());
         pauseButton.setBounds(600, 200, 100, 30);
         add(pauseButton);
 
         JButton clearButton = new JButton("Clear");
-        clearButton.addActionListener(_ -> clear());
+        clearButton.addActionListener(e -> clear());
         clearButton.setBounds(600, 250, 100, 30);
         add(clearButton);
     }
